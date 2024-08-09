@@ -64,7 +64,11 @@ def set_up():
             if tile.bomb:
                 for y_offset in range(-1, 2):
                     for x_offset in range(-1, 2):
-
+                        x_pos = col_index + x_offset
+                        y_pos = row_index + y_offset
+                        if 0 <= x_pos < col_num and 0 <= y_pos < row_num and field[y_pos][x_pos].bomb == False:
+                            field[y_pos][x_pos].neighbor_bomb_num += 1
+    return field
 
 
 field = set_up()
