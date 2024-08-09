@@ -75,6 +75,10 @@ while run:
                 else:
                     tile.image = images[f"{tile.neighbor_bomb_num}"]
             screen.blit(tile.image,tile.position)
+            if tile.open:
+                open_num += 1
+                if (row_num*col_num) - bomb_num == open_num and game_over == False:
+                    game_clear = True
     
     
     
