@@ -82,6 +82,15 @@ while run:
                 if (row_num*col_num) - bomb_num == open_num and game_over == False:
                     game_clear = True
     
+    if game_over:
+        timer += 1
+        if timer > 30:
+            screen.blit(game_over_text,(125,200))
+            screen.blit(reset_text,(125,400))
+    elif game_clear:
+        screen.blit(game_clear_text,(125,200))
+        screen.blit(reset_text,(125,400))
+    
     
     
     pygame.display.update()
