@@ -32,13 +32,13 @@ for _, __, img_files in walk(path):
     for image in img_files:
         full_path = path + "/" + image
         img = pygame.image.load(full_path)
-        img = pygame.transform.scale(img, (tile_size, tile_size))
+        img = pygame.transform.scale(img, (tile_size,tile_size))
         images[image.split(".")[0]] = img
 
 font = pygame.font.SysFont(None, 130)
-game_over_text = font.render("Game Over...", True, BLUE, GREEN)
-game_clear_text = font.render("Game Clear", True, RED, GREEN)
-reset_text = font.render("click to reset", True, BLACK, GREEN)
+game_over_text = font.render("Game Over...",True,BLUE,GREEN)
+game_clear_text = font.render("Game Clear", True,RED,GREEN)
+reset_text = font.render("click to reset",True,BLACK,GREEN)
 
 
 
