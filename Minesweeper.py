@@ -58,7 +58,12 @@ def set_up():
             tile.bomb = True
             tile.neighbor_bomb_num = -1
             count += 1
-
+    
+    for row_index, tile_list in enumerate(field):
+        for col_index, tile in enumerate(tile_list):
+            if tile.bomb:
+                for y_offset in range(-1, 2):
+                    for x_offset in range(-1, 2):
 
 
 
