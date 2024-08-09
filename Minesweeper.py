@@ -62,6 +62,22 @@ while run:
     
     
     
+    
+    
+    
+    
+    open_num = 0
+    for tile_list in field:
+        for tile in tile_list:
+            if tile.open:
+                if tile.bomb:
+                    tile.image = images["click_bomb"]
+                else:
+                    tile.image = images[f"{tile.neighbor_bomb_num}"]
+            screen.blit(tile.image,tile.position)
+    
+    
+    
     pygame.display.update()
 
 pygame.quit()
