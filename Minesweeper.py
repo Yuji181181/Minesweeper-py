@@ -48,8 +48,22 @@ def set_up():
             tile = Tile((col * tile_size, row * tile_size), images["empty_block"])
             tile_list.append(tile)
         field.append(tile_list)
+    
+    count = 0
+    while count < bomb_num:
+        x = random.randint(0, col_num - 1)
+        y = random.randint(0, row_num - 1)
+        tile = field[y][x]
+        if tile.bomb == False:
+            tile.bomb = True
+            tile.neighbor_bomb_num = -1
+            count += 1
+
+
+
 
 field = set_up()
+
 
 
 
