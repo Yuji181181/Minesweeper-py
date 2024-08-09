@@ -42,12 +42,33 @@ reset_text = font.render("click to reset", True, BLACK, GREEN)
 
 
 
-
-
-
-
-
 field = set_up()
+
+
+
+
+run = True
+while run:
+
+    screen.fill(WHITE)
+    
+    mx, my = pygame.mouse.get_pos()
+    
+    
+    
+    
+    
+    
+    
+    pygame.display.update()
+
+pygame.quit()
+
+
+
+
+
+
 
 
 
