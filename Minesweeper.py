@@ -40,7 +40,14 @@ game_over_text = font.render("Game Over...",True,BLUE,GREEN)
 game_clear_text = font.render("Game Clear", True,RED,GREEN)
 reset_text = font.render("click to reset",True,BLACK,GREEN)
 
-
+def set_up():
+    field = []
+    for row in range(row_num):
+        tile_list = []
+        for col in range(col_num):
+            tile = Tile((col * tile_size, row * tile_size), images["empty_block"])
+            tile_list.append(tile)
+        field.append(tile_list)
 
 field = set_up()
 
