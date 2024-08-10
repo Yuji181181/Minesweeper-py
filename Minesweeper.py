@@ -7,13 +7,10 @@ import random
 col_num = 20
 row_num = 20
 tile_size = 40
-
 screen_width = col_num*tile_size
 screen_height = row_num*tile_size
 screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption("Minesweeper.py")
-
-bomb_num = 50
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
@@ -25,6 +22,9 @@ game_over = False
 game_clear = False
 
 timer = 0
+
+bomb_num = 50
+
 
 images = {}
 path = "assets/img"
@@ -39,6 +39,7 @@ font = pygame.font.SysFont(None, 130)
 game_over_text = font.render("Game Over...",True,BLUE,GREEN)
 game_clear_text = font.render("Game Clear", True,RED,GREEN)
 reset_text = font.render("click to reset",True,BLACK,GREEN)
+
 
 def set_up():
     field = []
@@ -87,10 +88,8 @@ def open_tile(x, y, field):
                     open_tile(col, row, field)
 
 
-
 run = True
 while run:
-
     screen.fill(WHITE)
     
     mx, my = pygame.mouse.get_pos()
@@ -98,14 +97,40 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-    
-    
-    
-    
-    
-    
-    
-    
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if game_over == False and game_clear == False:
+                for tile_list in field:
+                    for tile in tile_list:
+                        if tile.rect.collidepoint((mx, my)):
+                            if event.button == 1:
+                                if tile.image != images["flag"]:
+                                    tile.open = True
+                                    if tile.neighbor_bomb_num == 0 and tile.bomb == False:
+                                        x = mx // tile_size
+                                        y = my // tile_size
+                                        open_tile(x, y, field)
+                                if tile.open and tile.image != images["0"]:
+                                    flag_num = 0
+                                    x = mx // tile_size
+                                    y = my// tile_size
+                                    for y_offset in range(-1, 2):
+                                        for x_offset in range(-1, 2):
+                                            col = x + x_offset
+                                            row = y + y_offset
+                                            if 0 <= col < col_num and 0 <= row < row_num and field[row][col].image == images["flag"]:
+                                                flag_num += 1
+                                    if flag_num == tile.neighbor_bomb_num and tile.bomb == False:
+                                        open_tile(x, y, field)
+                            if event.button == 3 and tile.open == False:
+                                if tile.image == images["empty_block"]:
+                                    tile.image = images["flag"]
+                                else:
+                                    tile.image = images["empty_block"]
+            else:
+                field = set_up()
+                game_over = False
+                game_clear = False
+                timer = 0
     
     open_num = 0
     for tile_list in field:
@@ -131,8 +156,6 @@ while run:
     elif game_clear:
         screen.blit(game_clear_text,(125,200))
         screen.blit(reset_text,(125,400))
-    
-    
     
     pygame.display.update()
 
