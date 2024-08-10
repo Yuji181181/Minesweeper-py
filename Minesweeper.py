@@ -70,10 +70,11 @@ def set_up():
                             field[y_pos][x_pos].neighbor_bomb_num += 1
     return field
 
-
 field = set_up()
 
-
+def open_tile(x, y, field):
+    if field[y][x].check:
+        return
 
 
 
