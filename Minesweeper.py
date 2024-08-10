@@ -75,6 +75,16 @@ field = set_up()
 def open_tile(x, y, field):
     if field[y][x].check:
         return
+    
+    field[y][x].check = True
+    for y_offset in range(-1, 2):
+        for x_offset in range(-1, 2):
+            col = x + x_offset
+            row = y + y_offset
+            if 0 <= col < col_num and 0 <= row < row_num and field[row][col].image != images["flag"]:
+                field[row][col].open = True
+                if field[row][col].neighbor_bomb_num == 0:
+                    open_tile(col, row, field)
 
 
 
